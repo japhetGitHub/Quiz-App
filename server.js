@@ -49,9 +49,14 @@ app.use(express.static("public"));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+const questionRouter = require('./routes/questions');
+
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.use('/quiz/:id', questionRouter(db));
+
 
 app.listen(PORT, () => {
 console.log(`Quiz app listening on port ${PORT}`);
