@@ -20,7 +20,7 @@ Where do we start?
     - reference user stories here
   - Draw.io
 
-## 5. Routes (30mins)
+## 5. Routes (30mins) ✅
   ![rest_routes_format](./images/rest-routes_format.png)
   - RESTful
   - create table outlining: http method, url pattern, use
