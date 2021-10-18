@@ -1,4 +1,4 @@
--- Drop and recarete quizzes table
+-- Drop and recreate quizzes table
 
 DROP TABLE IF EXISTS quizzes CASCADE;
 
