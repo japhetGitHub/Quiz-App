@@ -14,13 +14,14 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz.scss" type="text/scss" />
+
 
   <!-- JQuery -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
   <!-- Custom JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/question.js"></script>
 
   <title>Home Page</title>
 </head>
@@ -29,7 +30,21 @@
   <!-- Navbar -->
   <%- include('partials/_header') %>
 
-  <h1>Have fun! 🥔</h1>
+  <section id="questions-container">
+    <% for (const question of quiz) { %>
+    <article id="question-choices">
+      <div class="question">
+        <span><%= question.question %></span>
+      </div>
+      <div class="choices">
+        <span>Option 1: <%= question.choice_1 %></span>
+        <span>Option 2: <%= question.choice_2 %></span>
+        <span>Option 3: <%= question.choice_3 %></span>
+        <span>Option 4: <%= question.choice_3 %></span>
+      </div>
+    </article>
+    <%}%>
+  </section>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

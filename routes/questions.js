@@ -3,12 +3,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM questions`;
+    let query = `SELECT question, choice_1, choice_2, choice_3, choice_4 FROM questions`;
     console.log(query);
     db.query(query)
       .then(data => {
         const questions = data.rows;
-        res.json({ questions });
+        console.log(questions);
+        res.render("quiz", { quiz: questions });
       })
       .catch(err => {
         res
