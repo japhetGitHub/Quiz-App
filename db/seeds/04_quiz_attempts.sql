@@ -1,0 +1,1 @@
+INSERT INTO quiz_attempts (attempt_link, user_id, quiz_id) VALUES ('example/123456', 2, 1);
