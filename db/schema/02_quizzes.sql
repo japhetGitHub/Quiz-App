@@ -7,5 +7,5 @@ CREATE TABLE quizzes(
   title VARCHAR(255) NOT NULL,
   public BOOLEAN DEFAULT true,
   quiz_link VARCHAR(255) NOT NULL,
-  owner_id INTEGER REFERENCES user(id) ON DELETE CASCADE
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
