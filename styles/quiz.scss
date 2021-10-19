@@ -23,6 +23,11 @@
   justify-content: left;
 }
 
+.choices button:hover {
+  color: white;
+  background-color: black;
+}
+
 .question span {
   font-size: larger;
 }

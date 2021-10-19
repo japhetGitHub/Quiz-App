@@ -35,23 +35,24 @@
   <%- include('partials/_header') %>
 
     <section id="questions-container">
+      <% console.log("this is quiz: ", quiz) %>
+      <form id="choice-submit" method="POST" action="/quiz/:id">
       <% for (const question of quiz) { %>
-        <article id="question-choices">
+        <article id="question-choices" class="questionchoices" data-id= "<%=question.id%>">
           <div class="question">
             <span>
               <%= question.question %>
             </span>
           </div>
-          <form method="POST" action="/quiz/:id">
             <div class="choices">
-              <button type="submit">Option 1: <%= question.choice_1 %></button>
-              <button type="submit">Option 2: <%= question.choice_2 %></button>
-              <button type="submit">Option 3: <%= question.choice_3 %></button>
-              <button type="submit">Option 4: <%= question.choice_4 %></button>
+              <button id="btn1" type="submit">Choice 1: <%= question.choice_1 %></button>
+              <button id="btn2" type="submit">Choice 2: <%= question.choice_2 %></button>
+              <button id="btn3" type="submit">Choice 3: <%= question.choice_3 %></button>
+              <button id="btn4" type="submit">Choice 4: <%= question.choice_4 %></button>
             </div>
-          </form>
         </article>
-        <%}%>
+      <% } %>
+      </form>
     </section>
 
     <!-- Bootstrap JS -->
