@@ -5,7 +5,18 @@
   flex-direction: column;
 }
 
+#question-choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .choices {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.question span {
+  font-size: larger;
 }
