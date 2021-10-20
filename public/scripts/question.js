@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
   // --- our code goes here ---
   console.log("DOM is ready!")
@@ -7,15 +9,19 @@ $(document).ready(function() {
 
   const loadQuestions = () => {
     const id = $("#quiz-id").text()
-    console.log(id);
+    //console.log(id);
     $.ajax({
       url: `http://localhost:8080/quiz/${id}/data`,
       method: "GET",
       dataType: "json",
       success: (questions) => {
+        //current_question = questions.quiz[0].id;
+        //console.log("this is current q: ", current_question);
+        current_question = questions.quiz[0].id;
+        //console.log("current question", current_question);
         quizLen = questions.quiz.length;
         renderQuestions(questions.quiz);
-        showCurrentQuestion();
+        showCurrentQuestion(questions.quiz);
         registerOptions(questions.quiz);
       },
       error: (err) => {
@@ -56,9 +62,13 @@ $(document).ready(function() {
     }
   }
 
-  const showCurrentQuestion = function() {
+  const showCurrentQuestion = function(questions) {
     //console.log(quizLen)
-    for (let i = 1; i <= quizLen; i++) {
+    //console.log("this is quiz_id", quiz[0].id)
+    //console.log("this is id: ", questions[0].id)
+    const starting_id = questions[0].id;
+    for (let i = starting_id; i <= quizLen + starting_id; i++) {
+      //console.log("this is id", quiz[i].id)
       const question = $(`#question-${i}`)
       if (i === current_question) {
         question.show();
@@ -68,7 +78,68 @@ $(document).ready(function() {
     }
   }
 
-  // AJAX req for the quiz (NOTE: quiz will have quiz_id, questions, question_ids, question_answers, etc)
+  let user_answers = [];
+  let quiz_attempts = [];
+  const registerOptions = function (questions) {
+    $('#btn1, #btn2, #btn3, #btn4').click(function () {
+      //let user_answer = $(this).text();
+      const starting_id = questions[0].id;
+      let user_answer = $(this).attr("data-val");
+      const correct_answer = questions[current_question - starting_id].correct_answer;
+      const correct = user_answer === correct_answer;
+      const question_id = questions[current_question - starting_id].id;
+      const quiz_attempt_id = 1;
+      user_answers.push({ correct, question_id, quiz_attempt_id });
+      current_question = current_question + 1;
+
+      if (current_question > quizLen + starting_id - 1) {
+        //console.log("HELLO WORLD")
+        //console.log(quiz_attempts)
+        console.log(user_answers)
+        const id = $("#quiz-id").text()
+
+        $.ajax({
+          url: `http://localhost:8080/quiz/${id}`,
+          method: "POST",
+          data: {user_answers},
+          dataType: "json",
+          success: (response) => {
+            console.log(response);
+          },
+          error: (err) => {
+            console.log(`there was an error: ${err}`)
+          }
+        })
+
+        //addQuestionAttempts(user_answers);
+        alert("done quiz")
+      }
+      showCurrentQuestion(questions);
+      //console.log(user_answers)
+    })
+  }
+
+
+
+  const addQuestionAttempts = (attempts) => {
+    for (const attempt of attempts) {
+      const {correct, question_id, quiz_attempt_id} = attempt;
+      const sqlQuery = `INSERT INTO question_attempts (correct, question_id, quiz_attempt_id) VALUES ($1, $2, $3) RETURNING *`
+      pool.query(sqlQuery, [correct, question_id, quiz_attempt_id]);
+    }
+  }
+});
+
+
+
+//const attempt_link = 'localhost:8000/attempt1'
+      //const user_id = 1;
+      //const quiz_id = $("#quiz-id").text()
+      //quiz_attempts = [quiz_attempt_id, attempt_link, user_id, quiz_id];
+
+
+
+// AJAX req for the quiz (NOTE: quiz will have quiz_id, questions, question_ids, question_answers, etc)
   // then insert question data into mockup ONE at a time upon each press of 'next question' button and display the follow-up question
 
 
@@ -76,22 +147,3 @@ $(document).ready(function() {
   // AJAX reqs for the quiz. receive JSON { quiz }
     // compare the answers to the user_answers and evaluate if true/false
     //create an array of all the answers and send this true/false array to the POST /quiz/:id route endpoint
-  let user_answers = [];
-  const registerOptions = function (questions) {
-    $('#btn1, #btn2, #btn3, #btn4').click(function () {
-      //let user_answer = $(this).text();
-      let user_answer = $(this).attr("data-val");
-      correct_answer = questions[current_question - 1].correct_answer;
-      //console.log(user_answer)
-      //console.log(correct_answer);
-      user_answers.push(user_answer === correct_answer);
-      current_question = current_question + 1;
-      if (current_question > quizLen) {
-        //console.log("HELLO WORLD")
-        console.log(user_answers)
-      }
-      showCurrentQuestion();
-      //console.log(user_answers)
-    })
-  }
-});

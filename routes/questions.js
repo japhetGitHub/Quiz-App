@@ -26,6 +26,25 @@ module.exports = (db) => {
     let id = req.params.id;
     res.render("quiz", { id });
   });
+
+  router.post("/:id", (req, res) => {
+    const user_answers = req.body.user_answers;
+    //console.log(user_answers)
+
+    user_answers.map((attempt) => {
+      const {correct, question_id, quiz_attempt_id} = attempt;
+      const sqlQuery = `INSERT INTO question_attempts (correct, question_id, quiz_attempt_id) VALUES ($1, $2, $3) RETURNING *`
+      db.query(sqlQuery, [correct, question_id, quiz_attempt_id])
+        .then((response) => {
+          if (response.rows[0]) console.log("attempt inserted", response.rows[0])
+        })
+        .catch(error => console.log(error))
+    })
+
+
+    res.status(200).json("Data Inserted");
+
+  })
   // router post /:id    **REMEMBER: this POST req has the user_answers in the req.body***
     //const q_attempt_id= INSERT INTO quiz_attempts VALUES (quiz_id=req.param, user_id, attempt_link) RETURNING ID
 
