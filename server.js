@@ -56,6 +56,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/quiz/', questionRouter(db));
+// app.use('/api/quiz/', questionRouter(db));
 
 
 app.listen(PORT, () => {
