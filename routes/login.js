@@ -8,7 +8,7 @@ module.exports = (db) => {
 
     const retrieveUserQuery = 'SELECT id AS user_id FROM users WHERE username=$1';
 
-    db.query(retrieveUserQuery, [req.body.user_id])
+    db.query(retrieveUserQuery, [req.body.username])
       .then(data => {
         const user = data.rows[0];
         if (user) {
