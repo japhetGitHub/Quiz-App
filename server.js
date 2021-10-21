@@ -50,7 +50,7 @@ app.use(express.static("public"));
 // Separate them into separate routes files (see above).
 
 const questionRouter = require('./routes/quiz-router');
-const resultRouter = require('./routes/depricated_results-router');
+const resultRouter = require('./routes/results-router');
 
 app.get("/", (req, res) => {
   res.render("index");
