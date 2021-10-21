@@ -21,6 +21,7 @@ module.exports = (db) => {
       });
   });
 
+
   router.get("/:id", (req, res) => {
     let id = req.params.id;
     res.render("quiz", { id });
@@ -28,7 +29,7 @@ module.exports = (db) => {
 
 
   router.post("/:id", (req, res) => {
-    console.log("this is session", req.session)
+    //console.log("this is session", req.session.user_id)
     const attempt_link = generateRandomString();
     const user_id = req.body.user_id;
     const quiz_id = req.params.id;

@@ -50,6 +50,7 @@ app.use(express.static("public"));
 // Separate them into separate routes files (see above).
 
 const questionRouter = require('./routes/quiz-router');
+const resultRouter = require('./routes/results-router');
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -57,6 +58,8 @@ app.get("/", (req, res) => {
 
 app.use('/quiz', questionRouter(db));
 // app.use('/api/quiz/', questionRouter(db));
+
+app.use('/results', resultRouter(db));
 
 
 app.listen(PORT, () => {
