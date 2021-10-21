@@ -1,5 +1,4 @@
 
-
 $(document).ready(function() {
   // --- our code goes here ---
   console.log("DOM is ready!")
@@ -109,7 +108,7 @@ $(document).ready(function() {
           data: {user_answers, user_id},
           dataType: "json",
           success: (response) => {
-            console.log("this is response: ", response.quiz_attempt_id);
+            console.log("this is response: ", response)
             const quiz_attempt_id = response.quiz_attempt_id;
             window.location.href = `/results/${quiz_attempt_id}`;
           },
