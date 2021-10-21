@@ -105,7 +105,7 @@ $(document).ready(function() {
         $.ajax({
           url: `http://localhost:8080/quiz/${id}`,
           method: "POST",
-          data: {user_answers, user_id},
+          data: {user_answers},
           dataType: "json",
           success: (response) => {
             console.log("this is response: ", response)

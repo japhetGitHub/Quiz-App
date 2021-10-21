@@ -31,7 +31,8 @@ module.exports = (db) => {
   router.post("/:id", (req, res) => {
     //console.log("this is session", req.session.user_id)
     const attempt_link = generateRandomString();
-    const user_id = req.body.user_id;
+    const user_id = req.session.user_id;
+    console.log('**user_id**:', user_id);
     const quiz_id = req.params.id;
     const quizAttemptsQuery = `INSERT INTO quiz_attempts (attempt_link, user_id, quiz_id) VALUES ($1, $2, $3) RETURNING quiz_attempts.id`
 
