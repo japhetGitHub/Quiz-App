@@ -81,6 +81,11 @@ $(document).ready(function() {
   let user_answers = [];
   let quiz_attempts = [];
   const registerOptions = function (questions) {
+    const attempt_link = 'localhost8000/quiz/123/attempt';
+    const user_id = 1;
+    const quiz_id = questions[0].quiz_id;
+    quiz_attempts.push({ attempt_link, user_id, quiz_id })
+
     $('#btn1, #btn2, #btn3, #btn4').click(function () {
       //let user_answer = $(this).text();
       const starting_id = questions[0].id;
@@ -88,20 +93,20 @@ $(document).ready(function() {
       const correct_answer = questions[current_question - starting_id].correct_answer;
       const correct = user_answer === correct_answer;
       const question_id = questions[current_question - starting_id].id;
-      const quiz_attempt_id = 1;
-      user_answers.push({ correct, question_id, quiz_attempt_id });
+      //const quiz_attempt_id = 1;
+
+      user_answers.push({ correct, question_id });
+
       current_question = current_question + 1;
 
       if (current_question > quizLen + starting_id - 1) {
-        //console.log("HELLO WORLD")
-        //console.log(quiz_attempts)
-        console.log(user_answers)
+        console.log("this is quiz attempts: ", quiz_attempts);
         const id = $("#quiz-id").text()
 
         $.ajax({
           url: `http://localhost:8080/quiz/${id}`,
           method: "POST",
-          data: {user_answers},
+          data: {user_answers, user_id},
           dataType: "json",
           success: (response) => {
             console.log(response);
@@ -110,12 +115,9 @@ $(document).ready(function() {
             console.log(`there was an error: ${err}`)
           }
         })
-
-        //addQuestionAttempts(user_answers);
         alert("done quiz")
       }
       showCurrentQuestion(questions);
-      //console.log(user_answers)
     })
   }
 
