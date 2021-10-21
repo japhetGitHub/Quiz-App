@@ -100,7 +100,7 @@ $(document).ready(function() {
       current_question = current_question + 1;
 
       if (current_question > quizLen + starting_id - 1) {
-        console.log("this is quiz attempts: ", quiz_attempts);
+        //console.log("this is quiz attempts: ", quiz_attempts);
         const id = $("#quiz-id").text()
 
         $.ajax({
@@ -109,7 +109,9 @@ $(document).ready(function() {
           data: {user_answers, user_id},
           dataType: "json",
           success: (response) => {
-            console.log(response);
+            console.log("this is response: ", response.quiz_attempt_id);
+            const quiz_attempt_id = response.quiz_attempt_id;
+            window.location.href = `/results/${quiz_attempt_id}`;
           },
           error: (err) => {
             console.log(`there was an error: ${err}`)

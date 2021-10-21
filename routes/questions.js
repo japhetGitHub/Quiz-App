@@ -44,22 +44,25 @@ module.exports = (db) => {
         const user_answers = req.body.user_answers;
         // console.log('quiz_attempt_id:', quiz_attempt_id);
         // console.log('user_answers:', user_answers);
-        user_answers.map((attempt) => {
+        return Promise.all(user_answers.map((attempt) => {
           const { correct, question_id } = attempt;
           const sqlQuery = `INSERT INTO question_attempts (correct, question_id, quiz_attempt_id) VALUES ($1, $2, $3) RETURNING *`
-          db.query(sqlQuery, [correct, question_id, quiz_attempt_id])
-            .then((response) => {
-              if (response.rows[0]) {
-                //res.json({quiz_attempt_id})
-                console.log("hello")
-              }
-            })
-            .catch(error => {
-              console.log("INNER ERROR");
-              res.json({error});
-            })
+          return db.query(sqlQuery, [correct, question_id, quiz_attempt_id])}))
         })
+
+      .then((responses) => {
+        console.log("these are responses", responses);
+        if (responses[0].rows[0]) {
+          //return res.json({quiz_attempt_id})
+          const quiz_attempt_id = responses[0].rows[0].quiz_attempt_id;
+          console.log("inserted attempt: ", quiz_attempt_id)
+          res.json({quiz_attempt_id})
+        } else {
+          res.send("empty")
+        }
       })
+
+
       .catch(error => {
         console.log("OUTER ERROR");
         res.json({error});
