@@ -1,0 +1,48 @@
+body {
+  width: 100%;
+  font-size: 1.5em;
+}
+#public-quizzess,
+#leaderboard, #login {
+	margin-top: 5px;
+  text-align: center;
+}
+#quizList {
+  margin-top: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+tr,
+tbody {
+  text-align: center;
+}
+
+#score,
+#score_index {
+  text-align: center;
+}
+table {
+  table-layout: fixed;
+}
+
+#username,
+#score_index {
+  font-size: large;
+  font-weight: bold;
+}
+
+#p1 {
+  display: none;
+}
+#creator {
+  margin-top: 3px;
+  text-align: left;
+  font-size: 0.5em;
+}
+#quiz_div {
+  text-align: left;
+}
+
+
