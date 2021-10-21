@@ -40,10 +40,16 @@ app.use(cookieSession({
 }));
 
 
+//Load the user authentication before all routes
+const protectRoutes = require('./routes/authenticate');
+app.use(protectRoutes(db));
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
+
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -51,6 +57,8 @@ app.use(cookieSession({
 // app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
+
+app.use("/login", loginRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
