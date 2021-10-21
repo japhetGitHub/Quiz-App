@@ -22,9 +22,22 @@ module.exports = (db) => {
   });
 
 
-  router.get("/:id", (req, res) => {
-    let id = req.params.id;
-    res.render("quiz", { id });
+  router.get("/:link", (req, res) => {
+
+    let query = `SELECT id AS quiz_id FROM quizzes
+    WHERE quiz_link = $1`;
+    db.query(query, [req.params.link])
+      .then(data => {
+        const id = data.rows[0].quiz_id;
+        res.render("quiz", { id });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
+
   });
 
 
