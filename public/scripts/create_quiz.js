@@ -103,7 +103,7 @@ const createSuccessPage = function(quizTitle, quizLink) {
   return `
     <div class="tallcard d-flex flex-column align-items-center justify-content-center">
       <div class="row h2">${escape(quizTitle)}</div>
-      <div class="row h4 mt-2">
+      <div class="row h4 container mt-2">
         <div class="input-group">
           <span class="col-auto input-group-text"><i class="fas fa-share-alt-square"></i></span>
           <input class="col ps-3 form-control-plaintext" type="text" value="${escape(quizLink)}" readonly>
@@ -181,9 +181,20 @@ $(document).ready(function() {
   $('.card-body').on('submit', '#questionForm', function(event) {
     event.preventDefault();
 
-    const questionData = {};
+    const questionData = {
+      choices: {
+        choice_1: null,
+        choice_2: null,
+        choice_3: null,
+        choice_4: null
+      }
+    };
     $.each($('#questionForm').serializeArray(), function(i, field) {
-      questionData[field.name] = field.value;
+      if (field.name.includes('choice_')) {
+        questionData.choices[field.name] = field.value;
+      } else {
+        questionData[field.name] = field.value;
+      }
     });
     quizData.questions.push(questionData);
 
@@ -203,9 +214,9 @@ $(document).ready(function() {
 
     $.post("/quiz/new", quizData)
       .done(function(data) {
-        const title = data.title;
+        const quiz_title = data.quiz_title;
         const quiz_link = data.quiz_link;
-        successHandler(title, quiz_link);
+        successHandler(quiz_title, quiz_link);
         console.log(event);
         // console.log('finished the post:', data);
       })
