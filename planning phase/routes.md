@@ -1,14 +1,17 @@
 |  HTTP Pattern | URL pattern  | Use  |
 |---------------|--------------|------|
-| GET  | /  | Display homepage  |
+| GET  | /  | Display homepage with all public quizzes |
+| GET  | /login  | Display login page |
 | GET  | /login/:id  | Redirect to /  |
-| GET  | /categories/all  | Display all public quizzes  |
 | GET  | /quiz/new  | Display form for new quiz  |
 | POST  | /quiz/new  | Create new quiz  |
 | GET  | /quiz/:id  | Display a specific quiz  |
 | POST  | /quiz/:id  | Submit answered quiz  |
 | GET  | /results/:id  | Display result of quiz  |
-| GET  | /api/quiz/:id/question  | Retrieve questions & answer for quiz  |
+| GET  | /quiz/:id/data  | Retrieve questions & answer for quiz  |
+| GET  | /api/homepage  | Retrieve data from quizes  |
+
+
 | | **STRETCH** | |
 | GET  | /categories  | Display quiz categories  |
 | GET  | /categories/:id  | Display quizzes of a category  |
