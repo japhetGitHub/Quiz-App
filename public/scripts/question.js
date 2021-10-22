@@ -109,8 +109,8 @@ $(document).ready(function() {
           dataType: "json",
           success: (response) => {
             console.log("this is response: ", response)
-            const quiz_attempt_id = response.quiz_attempt_id;
-            window.location.href = `/results/${quiz_attempt_id}`;
+             const quiz_attempt_link = response.attempt_link;
+             window.location.href = `/results/${quiz_attempt_link}`;
           },
           error: (err) => {
             console.log(`there was an error: ${err}`)
