@@ -27,7 +27,7 @@ const createQuestionFormElement = function(questionNumber) {
       </div>
       <div class="row">
         <div class="col">
-          <textarea name="questionText" class="form-control" placeholder="Input Question Text" rows="2"></textarea>
+          <textarea id="qtntxt" name="questionText" class="form-control" placeholder="Input Question Text" rows="2"></textarea>
         </div>
       </div>
 
@@ -61,11 +61,11 @@ const createQuestionFormElement = function(questionNumber) {
 
       <div class="row mt-4">
         <div class="col d-block gap-2">
-          <button class="btn btn-dark" id="btn-add-choice" type="button">Add</button>
-          <button class="btn btn-dark disabled" id="btn-delete-choice" type="button">Remove</button>
+          <button class="btn btn-outline-light" id="btn-add-choice" type="button">Add</button>
+          <button class="btn btn-outline-light disabled" id="btn-delete-choice" type="button">Remove</button>
         </div>
         <div class="col-6 d-flex justify-content-end">
-          <button class="btn btn-dark" id="btn-new-question" type="submit">New Question</button>
+          <button class="btn btn-outline-light" id="btn-new-question" type="submit">New Question</button>
         </div>
       </div>
 
@@ -90,7 +90,7 @@ const createCardFooter = function() {
             </div>
           </div>
           <div class="col-5 col-sm-3 d-grid gap-2 mx-auto">
-            <button class="btn btn-dark" id="btn-publish" type="submit">Publish Quiz</button>
+            <button class="btn btn-outline-light" id="btn-publish" type="submit">Publish Quiz</button>
           </div>
           <div class=" col-sm-3"></div>
         </div>
@@ -105,8 +105,8 @@ const createSuccessPage = function(quizTitle, quizLink) {
       <div class="row h2">${escape(quizTitle)}</div>
       <div class="row h4 container mt-2">
         <div class="input-group">
-          <span class="col-auto input-group-text"><i class="fas fa-share-alt-square"></i></span>
-          <input class="col ps-3 form-control-plaintext" type="text" value="${escape(quizLink)}" readonly>
+          <span id="shrbtn" class="col-auto input-group-text"><i class="fas fa-share-alt-square"></i></span>
+          <input class="col ps-3 form-control-plaintext" id="linktext" type="text" value="${escape(quizLink)}" readonly>
         </div>
       </div>
     </div>

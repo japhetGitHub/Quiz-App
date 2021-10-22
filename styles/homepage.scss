@@ -46,5 +46,20 @@ table {
 }
 
 a {
-  color: #6c757d;
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: grey;
+}
+
+.list-group-item {
+  background-color: #ffffff59;
+}
+
+#creator {
+  color: white;
+}
+#copy {
+  color: white;
 }

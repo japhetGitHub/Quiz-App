@@ -21,6 +21,50 @@
 .tallcard {
   height: 70vh;
 }
+.card {
+  background-color: #fff0;
+}
+.form-control {
+  background-color: #fff0;
+}
+.form-control::placeholder {
+  color: #ffffff7c;
+}
+#linktext{
+  border: white;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.324);
+}
+#shrbtn {
+  background-color: rgba(255, 255, 255, 0.324);
+  color: white;
+  border: white;
+}
+input[type=text] {
+  color: white;
+}
+input[type=text]:active, input[type=text]:focus {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+}
+input[type=radio]:active, input[type=radio]:focus {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+
+}
+#quizTitle {
+  color: white;
+}
+#quizTitle:active, #quizTitle:focus {
+  background-color: rgba(255, 255, 255, 0);
+}
+#qtntxt {
+  color: white;
+}
+#qtntxt:active, #qtntxt:focus {
+  background-color: rgba(255, 255, 255, 0);
+}
+
 
 @media screen and (min-width: 768px) { // equal to bootstrap md breakpoint
   section {

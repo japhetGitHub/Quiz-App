@@ -2,7 +2,7 @@ body {
   // display: flex;
   // justify-content: center;
   // align-items: center;
-  // min-height: 100vh;
+  min-height: 100vh;
   // background: rgb(163, 208, 219);
   // background: linear-gradient(
   //   227deg,
@@ -13,4 +13,18 @@ body {
   //   rgba(163, 208, 219, 1) 74%,
   //   rgba(163, 208, 219, 1) 100%
   // );
+  background-image: linear-gradient( 64.5deg,  rgba(245,116,185,1) 14.7%, rgba(89,97,223,1) 88.7% );
+  color: white !important;
+}
+
+nav {
+  border: 1px solid #ffffff3d;
+}
+
+input {
+  background-color: #fff0;
+}
+
+input::placeholder {
+  color: #ffffff7c;
 }
