@@ -27,18 +27,31 @@ module.exports = (db) => {
    * DESCRIPTION: Create new quiz
    */
   router.post("/", (req, res) => {
-    // console.log('in the backend');
 
-    // TO DO:
-    // CHANGE owner_id to get value from session/cookie
-    const query = {
+    const quizQuery = {
       text: 'INSERT INTO quizzes (title, public, quiz_link, owner_id) VALUES ($1, $2, $3, $4) RETURNING id, title, quiz_link;',
       values: [req.body.quizTitle, req.body.isPublic, generateRandomString(), 2]
     }
-    db.query(query)
+    db.query(quizQuery)
     .then(data => {
-      console.log(data);
-      res.json(data.rows[0]);
+      const quiz_id = data.rows[0].id;
+      const quiz_title = data.rows[0].title;
+      const quiz_link = data.rows[0].quiz_link;
+
+      Promise.all(req.body.questions.map(question => {
+        const { questionText, correct, choices } = question;
+
+        const questionQuery = {
+          text: 'INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, choice_4, quiz_id) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+          values: [questionText, `choice_${correct}`, choices.choice_1, choices.choice_2, choices.choice_3, choices.choice_4, quiz_id]
+        };
+        db.query(questionQuery);
+      }))
+
+      return { quiz_title, quiz_link: `${req.get('host')}/quiz/quiz_link` };
+    })
+    .then((results) => {
+      res.json(results); // sends the quiz_title and quiz_link
     })
     .catch(err => {
       res
