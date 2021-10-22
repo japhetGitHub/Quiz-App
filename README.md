@@ -41,9 +41,9 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 
 ## Screenshots
 
-!["Screenshot of homepage"]()
-!["Screenshot of a sample quiz"]()
-!["Screenshot of create quiz form"]()
+!["Screenshot of homepage"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/homepage.png?raw=true)
+!["Screenshot of a sample quiz"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/quiz.png?raw=true)
+!["Screenshot of create quiz form"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/create_quiz.png?raw=true)
 
 ## Routes
 |  HTTP Pattern | URL pattern  | Use  |
