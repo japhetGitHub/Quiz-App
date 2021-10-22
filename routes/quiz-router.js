@@ -60,9 +60,6 @@ module.exports = (db) => {
 
       .then((responses) => {
         if (responses[0].rows[0]) {
-          //const quiz_attempt_id = responses[0].rows[0].quiz_attempt_id;
-          //console.log(responses[0].rows[0]);
-
           // I want to send back attempt link to scripts to redirect using attempt_link
           res.json({ attempt_link })
         } else {
@@ -70,7 +67,6 @@ module.exports = (db) => {
         }
       })
       .catch(error => {
-        console.log("OUTER ERROR");
         res.json({ error });
       })
   });

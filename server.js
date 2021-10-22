@@ -39,50 +39,33 @@ app.use(cookieSession({
   keys: ['some secret key to encrypt the session value', 'another one to allow for key rotation'],
 }));
 
-
 //Load the user authentication before all routes
 const protectRoutes = require('./routes/authenticate');
 app.use(protectRoutes(db));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const homepage = require("./routes/homepage");
-// const widgetsRoutes = require("./routes/widgets");
 const createQuizRoutes = require("./routes/create_quiz");
-
-// Mount all resource routes000
-
 const loginRoutes = require("./routes/login");
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/homepage", homepage(db));
-// app.use("/api/widgets", widgetsRoutes(db));
-app.use("/quiz/new", createQuizRoutes(db));
-// Note: mount other resources here, using the same pattern above
-
-app.use("/login", loginRoutes(db));
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
 const questionRouter = require('./routes/quiz-router');
 const resultRouter = require('./routes/results-router');
+
+// Mount all resource routes
+app.use("/api/homepage", homepage(db));
+app.use("/quiz/new", createQuizRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use('/quiz', questionRouter(db));
+app.use('/results', resultRouter(db));
+
 
 app.get("/", (req, res) => {
   res.render("index", { loggedIn: true });
 });
+
 app.get("/logout", (req, res) => {
-  req.session = null;
+  req.session = null; // destroys the session cookie
   res.redirect('/login');
 });
-
-app.use('/quiz', questionRouter(db));
-// app.use('/api/quiz/', questionRouter(db));
-
-app.use('/results', resultRouter(db));
-
 
 app.listen(PORT, () => {
   console.log(`Quiz app listening on port ${PORT}`);

@@ -1,20 +1,18 @@
 const express = require('express');
 const router  = express.Router();
-const cookieSession = require('cookie-session');
-
 
 module.exports = (db) => {
   router.post('/', (req, res) => {
 
     const retrieveUserQuery = 'SELECT id AS user_id FROM users WHERE username=$1';
 
-    db.query(retrieveUserQuery, [req.body.username])
+    db.query(retrieveUserQuery, [req.body.username]) // query db for given username
       .then(data => {
         const user = data.rows[0];
         if (user) {
           req.session.user_id = user.user_id;
           return res.redirect('/');
-        } else {
+        } else { // user is undefined when no matching user was found
           return res.redirect('/login');
         }
 
@@ -28,8 +26,8 @@ module.exports = (db) => {
   });
 
   router.get("/", (req, res) => {
-    console.log("in login / get");
     res.render('login' , { loggedIn: false });
   });
+
   return router;
 };

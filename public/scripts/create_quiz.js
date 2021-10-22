@@ -1,4 +1,4 @@
-const createChoiceElement = function(choiceNum) {
+const createChoiceElement = function(choiceNum) { // HTML for a single quiz choice
   return `
   <div class="row mt-2">
     <div class="col-10 col-sm-11">
@@ -11,7 +11,7 @@ const createChoiceElement = function(choiceNum) {
   `;
 };
 
-const createQuestionFormElement = function(questionNumber) {
+const createQuestionFormElement = function(questionNumber) { // Html for a single quiz question
   return `
     <form id="questionForm">
       <div class="row">
@@ -73,7 +73,7 @@ const createQuestionFormElement = function(questionNumber) {
   `;
 };
 
-const createCardFooter = function() {
+const createCardFooter = function() { // HTML for quiz publish and public/private selector
   return `
     <form id="publishForm">
       <div class="card-footer">
@@ -99,7 +99,7 @@ const createCardFooter = function() {
   `;
 };
 
-const createSuccessPage = function(quizTitle, quizLink) {
+const createSuccessPage = function(quizTitle, quizLink) { // HTML for 'quiz created successfully' view
   return `
     <div class="tallcard d-flex flex-column align-items-center justify-content-center">
       <div class="row h2">${escape(quizTitle)}</div>
@@ -113,16 +113,16 @@ const createSuccessPage = function(quizTitle, quizLink) {
   `;
 };
 
-const successHandler = function(quizTitle, quizLink) {
+const successHandler = function(quizTitle, quizLink) { // upon successfully creating quiz
   $('.card-header > h1').text('Success!');
-  $('.card-body').children().remove();
-  $('#publishForm').remove();
+  $('.card-body').children().remove(); //clears the card body
+  $('#publishForm').remove(); // removes footer
   $('.card-body').append(createSuccessPage(quizTitle, quizLink));
 };
 
-const quizHandler = function(quizNumber) {
+const quizHandler = function(quizNumber) { // upon inputing quiz title
   $('.card-body > form').remove();
-  $('.card-body').append(createQuestionFormElement(quizNumber));
+  $('.card-body').append(createQuestionFormElement(quizNumber)); // display's create question view
 };
 
 const escape = function(str) { // to prevent XSS attacks, input is santized here
@@ -132,30 +132,29 @@ const escape = function(str) { // to prevent XSS attacks, input is santized here
 };
 
 $(document).ready(function() {
-  const quizData = {
+  const quizData = { // final object being POSTed via AJAX
     quizTitle: '',
     isPublic: '',
     questions: []
   };
 
-  $('.card-body').on('submit', '#quizTitle', function(event) {
+  $('.card-body').on('submit', '#quizTitle', function(event) { // First step in multi-page form
     event.preventDefault();
 
-    $.each($('#quizTitle').serializeArray(), function(i, field) {
-        quizData['quizTitle'] = field.value ? field.value : 'placeholder title'; // Adds quizTitle: 'inputted title of quiz'
+    $.each($('#quizTitle').serializeArray(), function(i, field) { // receives the quizTitle form input
+        quizData['quizTitle'] = field.value ? field.value : 'placeholder title';
     });
 
     $('.card-header > h1').text(escape(quizData.quizTitle));//replace card title with quiz title
-    quizHandler(1);
-    $('.card').append(createCardFooter());
-    // console.log(quizData);
-
+    quizHandler(1); // repaints DOM to display question input form (second step)
+    $('.card').append(createCardFooter()); // adds 'publish quiz' button and public/private toggle
   });
 
   // since question form is dynamically added to DOM the listener must be delegated to a static element (i.e. .card-body)
-  $('.card-body').on('click', '#btn-add-choice', function(event) {
+  $('.card-body').on('click', '#btn-add-choice', function(event) { // event handler for Add Choice button
     let visibleChoices = $('#choices').children().length;
-    if(visibleChoices < 4) {
+    // allows max 4 choices
+    if (visibleChoices < 4) {
       visibleChoices++;
       const $choice = createChoiceElement(visibleChoices);
       $('#choices').append($choice);
@@ -166,9 +165,10 @@ $(document).ready(function() {
     $('#btn-delete-choice').removeClass('disabled');
   });
 
-  $('.card-body').on('click', '#btn-delete-choice', function(event) {
+  $('.card-body').on('click', '#btn-delete-choice', function(event) { // event handler for Delete Choice button
     let visibleChoices = $('#choices').children().length;
-    if(visibleChoices > 2) {
+    // allows min 2 choices
+    if (visibleChoices > 2) {
       $('#choices').children().last().remove();
       visibleChoices--;
     }
@@ -178,10 +178,10 @@ $(document).ready(function() {
     $('#btn-add-choice').removeClass('disabled');
   });
 
-  $('.card-body').on('submit', '#questionForm', function(event) {
+  $('.card-body').on('submit', '#questionForm', function(event) { // event handler for new question button
     event.preventDefault();
 
-    const questionData = {
+    const questionData = { // since variable # of choices (2 to 4) per question is allowed, they are all null by default and only those choices inputed will be repopulated
       choices: {
         choice_1: null,
         choice_2: null,
@@ -189,40 +189,35 @@ $(document).ready(function() {
         choice_4: null
       }
     };
-    $.each($('#questionForm').serializeArray(), function(i, field) {
+    $.each($('#questionForm').serializeArray(), function(i, field) { // receives question form data
       if (field.name.includes('choice_')) {
-        questionData.choices[field.name] = field.value;
+        questionData.choices[field.name] = field.value; //inputs choices
       } else {
-        questionData[field.name] = field.value;
+        questionData[field.name] = field.value; // inputs quizTitle
       }
     });
     quizData.questions.push(questionData);
 
-    console.log(quizData);
     quizHandler(quizData.questions.length);
   });
 
   $('.card').on('submit', '#publishForm', function(event) {
     event.preventDefault();
-    $('#questionForm').submit(); // submits the quiz before 'publishing'
-    console.log('here');
 
-    $.each($('#publishForm').serializeArray(), function(i, field) {
+    $('#questionForm').submit(); // submits the quiz before 'publishing' so that final question is added
+
+    $.each($('#publishForm').serializeArray(), function(i, field) { // receives public/private toggle data
       quizData['isPublic'] = field.value;
     });
-    // console.log('publish data:',questionData);
 
-    $.post("/quiz/new", quizData)
+    $.post("/quiz/new", quizData) // AJAX POST req to submit entire create quiz form
       .done(function(data) {
         const quiz_title = data.quiz_title;
         const quiz_link = data.quiz_link;
-        successHandler(quiz_title, quiz_link);
-        console.log(event);
-        // console.log('finished the post:', data);
+        successHandler(quiz_title, quiz_link); // Receives quiz title and quiz shareable link upon successful quiz creation
       })
       .fail(function(err) {
         console.error(err);
       });
-
-  })
+  });
 });

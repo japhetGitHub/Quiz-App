@@ -1,7 +1,5 @@
 
 $(document).ready(function() {
-  // --- our code goes here ---
-  console.log("DOM is ready!")
   // initialize variables
   let quizLen = 0;
   let current_question = 1;
@@ -118,7 +116,6 @@ $(document).ready(function() {
           data: {user_answers}, // sending the user answers
           dataType: "json",
           success: (response) => {
-            //console.log("this is response: ", response)
              const quiz_attempt_link = response.attempt_link; // receives attempt link from router
              window.location.href = `/results/${quiz_attempt_link}`; // redirects to results page
           },
