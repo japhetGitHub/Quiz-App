@@ -4,7 +4,7 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
 
-    db.query(`SELECT title, quizzes.owner_id, quiz_link, users.username FROM quizzes INNER JOIN users ON quizzes.owner_id = users.id;`)
+    db.query(`SELECT title, quizzes.owner_id, quiz_link, users.username FROM quizzes INNER JOIN users ON quizzes.owner_id = users.id WHERE public=true;`)
       .then(data => {
         const quiz = data.rows;
         res.json({ quiz });
