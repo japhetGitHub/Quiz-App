@@ -59,6 +59,11 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 | GET  | /quiz/:id/data  | Retrieve questions & answer for quiz  |
 | GET  | /api/homepage  | Retrieve data from quizes  |
 
+## MVP Wireframes
+Home Page             |  Quiz Page | Create Quiz Page
+:-------------------------:|:-------------------------:|:-----------:
+![homepage wireframe]()  |  ![quiz page wireframe]() |  ![create quiz page wireframe]()
+
 ## Future Improvements
 - Add Leaderboards
 - Implement Quiz Categories
