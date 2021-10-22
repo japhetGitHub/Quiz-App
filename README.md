@@ -62,7 +62,7 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 ## MVP Wireframes
 Home Page             |  Quiz Page | Create Quiz Page
 :-------------------------:|:-------------------------:|:-----------:
-![homepage wireframe]()  |  ![quiz page wireframe]() |  ![create quiz page wireframe]()
+![homepage wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/home_page_wireframe.png?raw=true)  |  ![quiz page wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/quizzing_wireframe.png?raw=true) |  ![create quiz page wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/createquiz_wireframe.png?raw=true)
 
 ## Future Improvements
 - Add Leaderboards
