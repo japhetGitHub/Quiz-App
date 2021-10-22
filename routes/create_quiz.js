@@ -19,7 +19,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
 
     // res.render() the EJS create new quiz form
-    res.render('create_quiz');
+    res.render('create_quiz', { loggedIn: true });
   });
 
   /**

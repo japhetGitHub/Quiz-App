@@ -29,7 +29,7 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     console.log("in login / get");
-    res.render('login');
+    res.render('login' , { loggedIn: false });
   });
   return router;
 };

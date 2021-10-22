@@ -5,16 +5,15 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-          <li class="nav-item">
-            <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
+      <% if (loggedIn) { %>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <a class="nav-link" style="margin-left: 5px;" href="/quiz/new"><i class="fas fa-plus-square"></i> Create Quiz</a>
+              <a class="nav-link" style="margin-left: 5px;" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
             </li>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <% } %>
     </div>
   </nav>
 </header>

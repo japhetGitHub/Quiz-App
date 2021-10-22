@@ -30,7 +30,7 @@ module.exports = (db) => {
     db.query(query, [req.params.link])
       .then(data => {
         const id = data.rows[0].attempt_id;
-        res.render("results", { id });
+        res.render("results", { id, loggedIn: true });
       })
       .catch(err => {
         res

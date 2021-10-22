@@ -71,7 +71,11 @@ const questionRouter = require('./routes/quiz-router');
 const resultRouter = require('./routes/results-router');
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { loggedIn: true });
+});
+app.get("/logout", (req, res) => {
+  req.session = null;
+  res.redirect('/login');
 });
 
 app.use('/quiz', questionRouter(db));
