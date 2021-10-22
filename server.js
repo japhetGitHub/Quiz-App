@@ -48,6 +48,9 @@ app.use(protectRoutes(db));
 // Note: Feel free to replace the example routes below with your own
 // const usersRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
+const createQuizRoutes = require("./routes/create_quiz");
+
+// Mount all resource routes000
 
 const loginRoutes = require("./routes/login");
 
@@ -55,7 +58,7 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
-
+app.use("/quiz/new", createQuizRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 app.use("/login", loginRoutes(db));
