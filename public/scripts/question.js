@@ -39,16 +39,16 @@ $(document).ready(function() {
     let choiceButtons = '';
 
     if (question.choice_1) {
-      choiceButtons += ` <button id="btn1" data-val="choice_1"> ${question.choice_1} </button>`;
+      choiceButtons += ` <button class="btn btn-outline-dark" id="btn1" data-val="choice_1"> ${question.choice_1} </button>`;
     }
     if (question.choice_2) {
-      choiceButtons += ` <button id="btn1" data-val="choice_2"> ${question.choice_2} </button>`;
+      choiceButtons += ` <button class="btn btn-outline-dark" id="btn1" data-val="choice_2"> ${question.choice_2} </button>`;
     }
     if (question.choice_3) {
-      choiceButtons += ` <button id="btn1" data-val="choice_3"> ${question.choice_3} </button>`;
+      choiceButtons += ` <button class="btn btn-outline-dark" id="btn1" data-val="choice_3"> ${question.choice_3} </button>`;
     }
     if (question.choice_4) {
-      choiceButtons += ` <button id="btn1" data-val="choice_4"> ${question.choice_4} </button>`;
+      choiceButtons += ` <button class="btn btn-outline-dark" id="btn1" data-val="choice_4"> ${question.choice_4} </button>`;
     }
 
     const markup = `
