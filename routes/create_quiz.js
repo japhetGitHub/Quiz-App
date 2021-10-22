@@ -48,7 +48,7 @@ module.exports = (db) => {
         db.query(questionQuery);
       }))
 
-      return { quiz_title, quiz_link: `${req.get('host')}/quiz/quiz_link` };
+      return { quiz_title, quiz_link: `${req.get('host')}/quiz/${quiz_link}` };
     })
     .then((results) => {
       res.json(results); // sends the quiz_title and quiz_link
