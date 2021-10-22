@@ -1,0 +1,36 @@
+.center-column {
+  display: flex;
+  justify-content: center;
+}
+.end-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#correct-title {
+  align-items: flex-end;
+}
+
+.input-group-text {
+  font-size: inherit;
+}
+.form-control-plaintext {
+  border: solid #000000;
+  border-width: 1px;
+}
+.tallcard {
+  height: 70vh;
+}
+
+@media screen and (min-width: 768px) { // equal to bootstrap md breakpoint
+  section {
+    display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // width: 768px;
+    // max-width: 768px;
+  }
+  .card {
+    width: 768px;
+  }
+}

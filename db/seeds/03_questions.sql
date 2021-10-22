@@ -7,3 +7,7 @@ INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, c
 INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, choice_4, quiz_id) VALUES ('What special item did the creators of Cards Against Humanity ship for their Black Friday pack?', 'choice_4', 'A Card Expansion', 'A Racist Toy', 'Cat Urine', 'Bull Feces', 1);
 
 INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, choice_4, quiz_id) VALUES ('Which British writer wrote for both Doctor Who and Sherlock?', 'choice_3', 'Phil Ford', 'Russell T Davies', 'Steven Moffatt', 'Toby Whithouse', 1);
+
+INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, choice_4, quiz_id) VALUES ('1+1', 'choice_1', '2', '3', '4', '5', 2);
+
+INSERT INTO questions (question, correct_answer, choice_1, choice_2, choice_3, choice_4, quiz_id) VALUES ('2+2', 'choice_2', '1', '4', '5', '7', 2);
