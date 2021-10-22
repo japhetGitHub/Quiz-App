@@ -31,6 +31,26 @@ $(document).ready(function() {
   loadQuestions();
 
   const createQuestionElement = (question) => {
+
+    // question has choice_1, choice_2, choice_3, choice_4 properties in its object
+    // if choice_x is not empty string then append a HTML button element text with the choice_x string in it
+    // add all button element text from above into markup html below
+
+    let choiceButtons = '';
+
+    if (question.choice_1) {
+      choiceButtons += ` <button id="btn1" data-val="choice_1"> ${question.choice_1} </button>`;
+    }
+    if (question.choice_2) {
+      choiceButtons += ` <button id="btn1" data-val="choice_2"> ${question.choice_2} </button>`;
+    }
+    if (question.choice_3) {
+      choiceButtons += ` <button id="btn1" data-val="choice_3"> ${question.choice_3} </button>`;
+    }
+    if (question.choice_4) {
+      choiceButtons += ` <button id="btn1" data-val="choice_4"> ${question.choice_4} </button>`;
+    }
+
     const markup = `
     <div class="trying" id="question-${question.id}">
     <div id="choice-submit">
@@ -39,10 +59,7 @@ $(document).ready(function() {
           <span> ${question.question} </span>
         </div>
         <div class="choices">
-          <button id="btn1" data-val="choice_1"> ${question.choice_1} </button>
-          <button id="btn2" data-val="choice_2"> ${question.choice_2} </button>
-          <button id="btn3" data-val="choice_3"> ${question.choice_3} </button>
-          <button id="btn4" data-val="choice_4"> ${question.choice_4} </button>
+          ${choiceButtons}
         </div>
       </article>
     </div>
