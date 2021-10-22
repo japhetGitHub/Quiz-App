@@ -13,15 +13,14 @@ const createQuizElement = function (data) {
 								<ol class="list-group">
 								<li class="list-group-item d-flex justify-content-between align-items-start">
     						<div id="quiz_div" class="ms-2 me-auto">
-								<a style="display:block" href="${data.quiz_link}">
+								<a style="display:block" href="http://localhost:8080/quiz/${data.quiz_link}">
   							<div class="fw-bold">${data.title}</div>
-                <p id="p1">${data.quiz_link}</p>
+                <p id="p1">http://localhost:8080/quiz/${data.quiz_link}</p>
 								</a>
                 <h3 id="creator">Created by @${data.username}</h3>
                 </div>
                 <div>
                 <button id="copy" class="btn"onclick="copyToClipboard('#p1')" ><i class="fas fa-share-alt"></i></button>
-                <h3 id="creator">Attempt 135 times</h3>
                 </div>
  								 </li>
 								 </ol>
