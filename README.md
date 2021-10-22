@@ -50,7 +50,7 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 |---------------|--------------|------|
 | GET  | /  | Display homepage with all public quizzes |
 | GET  | /login  | Display login page |
-| GET  | /login/:id  | Redirect to /  |
+| POST  | /login/:id  | Authenticate user then redirect to /  |
 | GET  | /quiz/new  | Display form for new quiz  |
 | POST  | /quiz/new  | Create new quiz  |
 | GET  | /quiz/:id  | Display a specific quiz  |
@@ -59,6 +59,7 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 | GET  | /quiz/:id/data  | Retrieve questions & answer for quiz  |
 | GET  | /api/homepage  | Retrieve data from quizes  |
 
-## Future Features
-- Various Leaderboards
-- Quiz Categories
+## Future Improvements
+- Add Leaderboards
+- Implement Quiz Categories
+- Improve error handling and vulnerabilities
