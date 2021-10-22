@@ -67,7 +67,8 @@ module.exports = (db) => {
 
           const quiz_attempt_id = responses[0].rows[0].quiz_attempt_id;
           //console.log("inserted attempt: ", quiz_attempt_id)
-          res.json({quiz_attempt_id})
+          console.log(responses[0].rows[0]);
+          res.json({attempt_link})
         } else {
           res.send("empty")
         }

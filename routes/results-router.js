@@ -18,10 +18,27 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id", (req, res) => {
-    let id = req.params.id;
-    res.render("results", { id });
+  // router.get("/:id", (req, res) => {
+  //   let id = req.params.id;
+  //   res.render("results", { id });
+  // });
+
+  router.get("/:link", (req, res) => {
+
+    let query = `SELECT id AS attempt_id FROM quiz_attempts
+    WHERE attempt_link = $1`;
+    db.query(query, [req.params.link])
+      .then(data => {
+        const id = data.rows[0].attempt_id;
+        res.render("results", { id });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
+
 
   return router;
 };

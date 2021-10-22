@@ -14,6 +14,11 @@ $(document).ready(function() {
         console.log(result.results);
         resultsLen = result.results.length;
         let count = countCorrect(result.results);
+        var url      = window.location.href;
+        $("#foo").append(count)
+        $("#length").append(resultsLen)
+        $("#url").append(url)
+
         console.log("count: ", count);
         console.log("length", resultsLen);
       },
@@ -35,3 +40,12 @@ const countCorrect = function(results) {
   }
   return counter;
 }
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).html()).select();
+  document.execCommand("copy");
+  $temp.remove();
+  alert("Result Link Copied!");
+ }
