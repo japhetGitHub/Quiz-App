@@ -26,7 +26,6 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 - Bootstrap CSS/UI framework
 - SASS for styling
 
-
 ## Dependencies
 
 - chalk 2.4.x or above
@@ -38,12 +37,6 @@ The app architecture is a multi-page design with some pages acting as SPA's (e.g
 - pg 8.5.0 or above
 - pg-native 3.0.0 or above
 - sass 1.35.x or above
-
-## Screenshots
-
-!["Screenshot of homepage"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/homepage.png?raw=true)
-!["Screenshot of a sample quiz"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/quiz.png?raw=true)
-!["Screenshot of create quiz form"](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/create_quiz.png?raw=true)
 
 ## Routes
 |  HTTP Pattern | URL pattern  | Use  |
@@ -64,7 +57,11 @@ Home Page             |  Quiz Page | Create Quiz Page
 :-------------------------:|:-------------------------:|:-----------:
 ![homepage wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/home_page_wireframe.png?raw=true)  |  ![quiz page wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/quizzing_wireframe.png?raw=true) |  ![create quiz page wireframe](https://github.com/japhetGitHub/Quiz-App/blob/master/docs/createquiz_wireframe.png?raw=true)
 
+## Screenshots
+<img src="https://github.com/japhetGitHub/Quiz-App/blob/master/docs/create_quiz.png?raw=true" width="500"/> <img src="https://github.com/japhetGitHub/Quiz-App/blob/master/docs/homepage.png?raw=true" width="500"/> <img src="https://github.com/japhetGitHub/Quiz-App/blob/master/docs/quiz.png?raw=true" width="500"/>
+
 ## Future Improvements
+- Improve UI, both layout & color scheme (currently a poc)
 - Add Leaderboards
 - Implement Quiz Categories
 - Improve error handling and vulnerabilities
